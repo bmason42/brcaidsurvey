@@ -3,11 +3,45 @@
   "bmRegions": [
     {"regionID": "alabama","name": "Alabama"},
     {"regionID": "alaska","name": "Alaska"},
-    {"regionID": "ca-eb","name": "California: East Bay"}
+    {"regionID": "arizona","name": "Arizona"},
+    {"regionID": "arizona","name": "Arizona"},
+    {"regionID": "ca-eb","name": "California: East Bay"},
+    {"regionID": "ca-la","name": "California: Los Angeles"},
+    {"regionID": "ca-monterey","name": "California: MPYRE--Monterey Burners"},
+    {"regionID": "ca-nb","name": "California: North Bay"},
+    {"regionID": "ca-orange","name": "California: Orange County"},
+    {"regionID": "ca-sac","name": "California: Sacramento"},
+    {"regionID": "ca-sd","name": "California: San Diego"},
+    {"regionID": "ca-sc","name": "California: Santa Cruz"},
+    {"regionID": "ca-sb","name": "California: South Bay"},
+    {"regionID": "ca-nv","name": "California/Nevada: Tahoe"},
+    {"regionID": "co-bo","name": "Colorado: Boulder"},
+    {"regionID": "co-den","name": "Colorado: Denver Burners"},
+    {"regionID": "co-noth","name": "Colorado: Northern Colorado"},
+    {"regionID": "co-se","name": "Colorado: Southeastern Colorado"},
+    {"regionID": "co-west","name": "Colorado: Western Colorado"},
+    {"regionID": "conn","name": "Connecticut"},
+    {"regionID": "fl-south","name": "Florida--South Florida"},
+    {"regionID": "fl-orlando","name": "Florida--Orlando"},
+    {"regionID": "ga","name": "Georgia"},
+    {"regionID": "hi-bigisland","name": "Hawaii--Big Island"},
+    {"regionID": "","name": ""},
+    {"regionID": "","name": ""},
+    {"regionID": "","name": ""},
+    {"regionID": "","name": ""}
+
+
+
   ],
   "concerns":[
     {"concernID": "health","concern": "Health Concerns (Medical Expertise, Healthcare, Pharmacy)"},
     {"concernID": "emotional","concern": "Emotional Support)"},
-    {"concernID": "phy-resource","concern": "Physical Resources (Food, Clothing, TP, Essentials)"}
+    {"concernID": "phy-resource","concern": "Physical Resources (Food, Clothing, TP, Essentials)"},
+    {"concernID": "housing-storage","concern": "Housing/Storage (Space/Trailer/Land)"},
+    {"concernID": "work","concern": "Work Trade (Remote, Social-Distancing Compliant)"},
+    {"concernID": "repairs","concern": "Repairs or Logistical Services (Car, House, Etc.)"},
+    {"concernID": "household-finc","concern": "Household Finances (Taxes, Budgeting, Etc.)"},
+    {"concernID": "employment","concern": "Obtaining Unemployment or Finding a Job"},
+    {"concernID": "leadership","concern": "Being a Community Leader or Social Networking (Work with BRC Aid)"}
   ]
 }
