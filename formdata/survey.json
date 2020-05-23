@@ -1,0 +1,13 @@
+
+{
+  "bmRegions": [
+    {"regionID": "alabama","name": "Alabama"},
+    {"regionID": "alaska","name": "Alaska"},
+    {"regionID": "ca-eb","name": "California: East Bay"}
+  ],
+  "concerns":[
+    {"concernID": "health","concern": "Health Concerns (Medical Expertise, Healthcare, Pharmacy)"},
+    {"concernID": "emotional","concern": "Emotional Support)"},
+    {"concernID": "phy-resource","concern": "Physical Resources (Food, Clothing, TP, Essentials)"}
+  ]
+}
