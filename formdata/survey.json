@@ -4,7 +4,6 @@
     {"regionID": "alabama","name": "Alabama"},
     {"regionID": "alaska","name": "Alaska"},
     {"regionID": "arizona","name": "Arizona"},
-    {"regionID": "arizona","name": "Arizona"},
     {"regionID": "ca-eb","name": "California: East Bay"},
     {"regionID": "ca-la","name": "California: Los Angeles"},
     {"regionID": "ca-monterey","name": "California: MPYRE--Monterey Burners"},
@@ -24,14 +23,10 @@
     {"regionID": "fl-south","name": "Florida--South Florida"},
     {"regionID": "fl-orlando","name": "Florida--Orlando"},
     {"regionID": "ga","name": "Georgia"},
-    {"regionID": "hi-bigisland","name": "Hawaii--Big Island"},
-    {"regionID": "","name": ""},
-    {"regionID": "","name": ""},
-    {"regionID": "","name": ""},
-    {"regionID": "","name": ""}
-
-
-
+    {
+      "regionID": "hi-bigisland",
+      "name": "Hawaii--Big Island"
+    }
   ],
   "concerns":[
     {"concernID": "health","concern": "Health Concerns (Medical Expertise, Healthcare, Pharmacy)"},

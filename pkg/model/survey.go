@@ -17,23 +17,33 @@ const (
 
 type SurveyContact struct {
 	//a generated uuid used for associates
-	ID                string
+	SurveyContactID   string `gorm:"type:varchar(36);primary_key"`
 	EncryptionVersion EncryptionVersion
+	OSPhoneNumber     string `gorm:"type:varchar(12)"`
 	//the encrypted PiInfo
-	PII string
+	PII string `gorm:"type:text"`
 }
 
 type SurveyResult struct {
 	//a generated uuid used for associates
-	ID string
+	SurveyResultID  string `gorm:"type:varchar(36);primary_key"`
+	SurveyContactID string
+	Contact         SurveyContact `gorm:"foreignkey:SurveyContactID"`
+	//Region RegionInfo `gorm:"foreignkey:RegionID"`
+	//Needs []SupportConcern `gorm:"foreignkey:ConcernID;association_foreignkey:SurveyResultID"`
 }
 
+//Burning Man region
+//These are in the survey.json file
 type RegionInfo struct {
-	RegionID string `json:"regionID"`
+	RegionID string `json:"regionID" gorm:"type:varchar(36);primary_key"`
 	Name     string `json:"name"`
 }
+
+//different support issues such as phyiscal, financial, health, mental health
+//These are in the survey.json file
 type SupportConcern struct {
-	ConcernID string `json:"concernID"`
+	ConcernID string `json:"concernID" gorm:"type:varchar(36);primary_key"`
 	Concern   string `json:"concern"`
 }
 
