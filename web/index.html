@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="main.css" rel="stylesheet">
+    <script src="scripts/jquery-3.5.1.min.js"></script>
+    <script src="scripts/main.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Open Crisis Line</title>
+</head>
+<body>
+<div class="title">
+    Open Crisis Line, Burners helping Burners
+</div>
+<div class="into">
+
+    We are here to help<br>
+    Please fill in the form below sharing as much information as you want But we do need your phone number to contact
+    you<br>
+    <p>
+        This is a peer support system. You will be put in contact with a ranger. Not necessarily a licensed
+        professional.
+        <br>
+    <ol>
+        <li>Fill out the form</li>
+        <li>Press the "Connect" button</li>
+        <li>You will receive a text to your phone and a PIN number will be displayed here</li>
+        <li>Reply to the Text with the PIN number displayed below</li>
+    </ol>
+    </p>
+
+</div>
+<form>
+    <table id="support-form">
+        <tr>
+            <th>Your phone number:</th>
+            <td><input type="tel" id="phone-number"/></td>
+        </tr>
+        <tr>
+            <th>Your Name (playa, default or none):</th>
+            <td><input type="text" id="name"/></td>
+        </tr>
+        <tr>
+            <th>Tell us what is going on today:</th>
+            <td><textarea id="whats-going-on" rows="3" cols="40"></textarea></td>
+        </tr>
+        <tr>
+            <th>PIN:</th>
+            <td><span id="pin">Click Connect to see PIN </span></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input class="submitbutton" type="button" id="submit" value="Connect"
+                                                  onclick="handleSupportButton()"></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Open Crisis Line API
+  description: A service to initial help calls
+  version: 1.0.0
+servers:
+  - url: /opencrisisline2/v1
+
+paths:
+  /about:
+    get:
+      summary: Returns a version info
+      description: Optional extended description in Markdown.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AboutResponse'
+  /support-request:
+    post:
+      summary: Post to this URL to start a support request
+      description: Post to this URL to start a support request
+      requestBody:
+        description: Login data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HelpRequest'
+
+      responses:
+        '201':
+          description: request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelpResponse'
+
+        '400':
+          description: internal error issue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+        '500':
+          description: internal error issue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+
+components:
+  schemas:
+    HelpResponse:
+      type: object
+      properties:
+        requestID:
+          type: string
+          description: the ID record for the request
+        authPin:
+          description: A short auto generated pin the user needs to send in an SMS reply
+          type: string
+
+    HelpRequest:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        callerName:
+          type: string
+        message:
+          type: string
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          description: An I18N string
+          type: string
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+
+    AboutResponse:
+      type: object
+      properties:
+        appVersion:
+          type: string
+        apiVersions:
+          type: array
+          items:
+            type: string
+
