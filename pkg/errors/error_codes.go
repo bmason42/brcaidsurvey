@@ -21,8 +21,8 @@ const (
 )
 
 const (
-	OCERROR_ERROR = "opencrisis2"
-	NETWOR_ERROR  = "network"
+	BRCAID_ERROR = "brcaiderror"
+	NETWOR_ERROR = "network"
 )
 
 type InternalError struct {

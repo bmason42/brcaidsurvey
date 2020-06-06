@@ -21,9 +21,8 @@ COPY --from=openapigenerate /work/tmp/go/* pkg/generated/v1/
 RUN make buildlinux
 
 FROM scratch
-#RUN mkdir -p third_party/swaggerui & mkdir -p api
-COPY --from=build /build/out/opencrisisline2_x64linux ./opencrisisline2_x64linux
+COPY --from=build /build/out/brcaid_x64linux ./brcaid_x64linux
 COPY --from=build /build/third_party/swaggerui/* ./third_party/swaggerui/
 COPY --from=build /build/web/ ./web/
 COPY --from=build /build/api/* ./api/
-ENTRYPOINT ["./opencrisisline2_x64linux"]
+ENTRYPOINT ["./brcaid_x64linux"]

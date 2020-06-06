@@ -2,8 +2,8 @@ BUILD_TAG:=$(shell date '+%Y%m%d%H%M')
 
 OPENAPIDEF_FILE=api/openapi-1.yaml
 openapicli_jar=third_party/tools/openapi-generator-cli.jar
-DOCKERTAG=opencrisisline2
-APPNAME=opencrisisline2
+DOCKERTAG=brcaid
+APPNAME=brcaid
 test:
 	echo ${BUILD_TAG}
 
