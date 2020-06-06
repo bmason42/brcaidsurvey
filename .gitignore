@@ -1,4 +1,4 @@
 out
 go.sum
-pkg/generate
+pkg/generated
 
