@@ -35,7 +35,8 @@ func createDbORM() {
 		&model.User{},
 		&model.UserGroup{},
 		&model.UserGroupX{},
-		&model.Permission{})
+		&model.Permission{},
+		&model.ZipCode{})
 	//db.Model(&model.SurveyResult{}).AddForeignKey("survey_contact_id", "survey_contacts(survey_contact_id)", "RESTRICT", "RESTRICT")
 
 	//db.Raw("DROP INDEX event_idx on log_entry")

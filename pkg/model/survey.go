@@ -15,6 +15,16 @@ const (
 	ENCRYPT_VERSION_NONE EncryptionVersion = iota
 )
 
+type ZipCode struct {
+	ZipCode string `gorm:"type:varchar(10);primary_key"`
+	State   string
+	City    string
+	Lat     float64
+	Long    float64
+	Xaxis   float64
+	Yaxis   float64
+	Zaxis   float64
+}
 type SurveyContact struct {
 	//a generated uuid used for associates
 	SurveyContactID   string `gorm:"type:varchar(36);primary_key"`
