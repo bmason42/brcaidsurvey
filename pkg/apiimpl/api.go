@@ -5,7 +5,7 @@
 package apiimpl
 
 import (
-	"github.com/bmason42/opencrisisline2/pkg/generated/v1"
+	"brcaidsurvey/pkg/generated/v1"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"net/http"
@@ -37,5 +37,5 @@ func healthCheckGetUnversioned(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{})
 }
 func swaggerUIGetHandler(c *gin.Context) {
-	c.Redirect(302, "/opencrisisline2/swaggerui/index_v1.html")
+	c.Redirect(302, "/brcaid/swaggerui/index_v1.html")
 }

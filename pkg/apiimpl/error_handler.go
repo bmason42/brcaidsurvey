@@ -5,10 +5,11 @@
 package apiimpl
 
 import (
+	"brcaidsurvey/pkg/errors"
+	"brcaidsurvey/pkg/generated/v1"
 	"context"
 	"fmt"
-	"github.com/bmason42/opencrisisline2/pkg/errors"
-	"github.com/bmason42/opencrisisline2/pkg/generated/v1"
+
 	"net/http"
 
 	log "github.com/sirupsen/logrus"
@@ -61,7 +62,7 @@ func handleError(ctx context.Context, e error) (httpStatusCode int, resp *v1.Err
 		httpStatusCode = http.StatusInternalServerError
 		params := make(map[string]string)
 		params["detail"] = e.Error()
-		resp = newErrorResponse(errors.OCERROR_ERROR, errors.ERROR_CODE_UNKNOWN, errors.GetErrorString(locale, errors.ERROR_CODE_UNKNOWN), params)
+		resp = newErrorResponse(errors.BRCAID_ERROR, errors.ERROR_CODE_UNKNOWN, errors.GetErrorString(locale, errors.ERROR_CODE_UNKNOWN), params)
 	}
 	return
 }

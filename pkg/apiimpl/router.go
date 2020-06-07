@@ -58,24 +58,24 @@ func newRouter() *gin.Engine {
 	return router
 }
 func addOpenApiDefRoutes(router *gin.Engine) {
-	router.StaticFile("/opencrisisline2/openapi-1.yaml", "api/openapi-1.yaml")
-	router.StaticFile("/opencrisisline2/swagger.yaml", "api/openapi-1.yaml")
+	router.StaticFile("/brcaid/openapi-1.yaml", "api/openapi-1.yaml")
+	router.StaticFile("/brcaid/swagger.yaml", "api/openapi-1.yaml")
 }
 
 func addWebUIRoutes(router *gin.Engine) {
 	webUI := static.LocalFile("web/", false)
-	webHandler := static.Serve("/opencrisisline2", webUI)
+	webHandler := static.Serve("/brcaid", webUI)
 	router.Use(webHandler)
 }
 func addSwaggerUIRoutes(router *gin.Engine) {
-	router.Handle("GET", "/opencrisisline2/swaggerui/index.html", swaggerUIGetHandler)
-	router.Handle("GET", "/opencrisisline2/swaggerui", swaggerUIGetHandler)
-	router.Handle("GET", "/opencrisisline2/swaggerui/", swaggerUIGetHandler)
+	router.Handle("GET", "/brcaid/swaggerui/index.html", swaggerUIGetHandler)
+	router.Handle("GET", "/brcaid/swaggerui", swaggerUIGetHandler)
+	router.Handle("GET", "/brcaid/swaggerui/", swaggerUIGetHandler)
 	swaggerUI := static.LocalFile("third_party/swaggerui/", false)
-	webHandler := static.Serve("/opencrisisline2/swaggerui/", swaggerUI)
+	webHandler := static.Serve("/brcaid/swaggerui/", swaggerUI)
 	router.Use(webHandler)
 }
 func addUnversionedRoutes(router *gin.Engine) {
-	router.Handle("GET", "/opencrisisline2/about", aboutGetUnversioned)
-	router.Handle("GET", "/opencrisisline2/healthcheck", healthCheckGetUnversioned)
+	router.Handle("GET", "/brcaid/about", aboutGetUnversioned)
+	router.Handle("GET", "/brcaid/healthcheck", healthCheckGetUnversioned)
 }

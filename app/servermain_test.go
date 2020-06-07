@@ -5,8 +5,8 @@
 package main
 
 import (
-	"github.com/bmason42/opencrisisline2/pkg/apiimpl"
-	"github.com/bmason42/opencrisisline2/pkg/model"
+	"brcaidsurvey/pkg/apiimpl"
+	"brcaidsurvey/pkg/model"
 	"testing"
 )
 

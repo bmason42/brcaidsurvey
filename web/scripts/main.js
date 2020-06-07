@@ -2,7 +2,7 @@
  * Copyright (c) 2020.  This software is made for the Black Rock City Aid group and is provided AS IS with no support or liability under the Apache 2 license.
  */
 
-const baseURL = "/opencrisisline2/v1";
+const baseURL = "/brcaid/v1";
 
 function handleSupportButton() {
     let number = $("#phone-number").val();
