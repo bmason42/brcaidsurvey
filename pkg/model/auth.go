@@ -43,6 +43,14 @@ func InitSessionCache() error {
 	sessionCache = make(map[string]*Session, 0)
 	return nil
 }
+func LookupSession(sessionID string) *Session {
+	var ret *Session
+	ret = sessionCache[sessionID]
+	return ret
+}
+func RemoveSession(sessionID string) {
+	sessionCache[sessionID] = nil
+}
 func MakeNewSession(userID string) *Session {
 	session := Session{UserID: userID, SessionID: uuid.New().String()}
 	session.touch()

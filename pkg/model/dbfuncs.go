@@ -182,3 +182,18 @@ func FetchUserUserID(userID string) (*User, error) {
 	}
 	return ret, nil
 }
+func FetchUsers() ([]User, error) {
+	db, err := GetDBConnection()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+	var res *gorm.DB
+
+	var users []User
+	res = db.Find(&users)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+	return users, nil
+}

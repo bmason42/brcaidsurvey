@@ -5,18 +5,27 @@
 package apiimpl
 
 import (
+	"brcaidsurvey/pkg/model"
 	"context"
+	"fmt"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"time"
 )
 
+var noAuthRoutesSuffix []string
+
 // Run - configures and starts the web server
 func RunServer() error {
+	noAuthRoutesSuffix = make([]string, 0)
+	noAuthRoutesSuffix = append(noAuthRoutesSuffix, "/about")
+	noAuthRoutesSuffix = append(noAuthRoutesSuffix, "/login")
+
 	r := newRouter()
 	srv := &http.Server{
 		Addr:    ":8080",
@@ -45,12 +54,46 @@ func RunServer() error {
 	log.Println("Server exiting")
 	return nil
 }
+func authSkip() bool {
+	return os.Getenv("SKIP_AUTH") == "true"
+}
 
+func RouteAuthorized(c *gin.Context) {
+
+	if authSkip() {
+		return
+	}
+	atLeastOnePassed := false
+	for _, suffix := range noAuthRoutesSuffix {
+		if strings.HasSuffix(c.Request.URL.Path, suffix) {
+			atLeastOnePassed = true
+			break
+		}
+	}
+	//path was not a no auth path, so check session
+	if !atLeastOnePassed {
+		authToken := c.Request.Header.Get("Authorization")
+		session := model.LookupSession(authToken)
+		fmt.Println(session)
+		//todo, check against auth table of paths... And make that auth table
+		atLeastOnePassed = true
+	}
+	if atLeastOnePassed {
+		c.Next()
+	} else {
+		c.JSON(http.StatusUnauthorized, "")
+		c.Abort()
+	}
+
+	return
+}
 func newRouter() *gin.Engine {
 	router := gin.Default()
-	v1 := router.Group("/brcaid/v1")
+	v1 := router.Group("/brcaid/v1", RouteAuthorized)
 	v1.Handle("GET", "/about", aboutGetUnversioned)
 	v1.Handle("POST", "/login", loginHandler)
+	v1.Handle("POST", "/logout", logoutHandler)
+	v1.Handle("GET", "/users", userGetHandler)
 	addOpenApiDefRoutes(router)
 	addSwaggerUIRoutes(router)
 	addUnversionedRoutes(router)

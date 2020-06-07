@@ -57,3 +57,24 @@ func loginHandler(c *gin.Context) {
 		c.JSON(401, "")
 	}
 }
+func logoutHandler(c *gin.Context) {
+	authToken := c.Request.Header.Get("Authorization")
+	model.RemoveSession(authToken)
+	c.JSON(204, "")
+}
+func userGetHandler(c *gin.Context) {
+	users, e := model.FetchUsers()
+	if e != nil {
+		c.JSON(handleError(c, e))
+		return
+	}
+	ret := make([]v1.User, len(users))
+	for i := range users {
+		ret[i].UserID = users[i].UserID
+		ret[i].UserUUID = users[i].UserUUID
+		ret[i].Phone = users[i].Phone
+		ret[i].Email = users[i].Email
+		//ret[i].=users[i].Name
+	}
+	c.JSON(200, ret)
+}
