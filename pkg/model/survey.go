@@ -34,6 +34,7 @@ type SurveyContact struct {
 	NeedHelpNow       bool
 	OfferedSkills     string
 	RequestedSkills   string
+	ZipCode           string
 	EncryptionVersion EncryptionVersion
 	//the encrypted PiInfo
 	PII string `gorm:"type:text"`

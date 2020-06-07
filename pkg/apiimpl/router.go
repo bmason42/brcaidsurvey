@@ -7,7 +7,6 @@ package apiimpl
 import (
 	"brcaidsurvey/pkg/model"
 	"context"
-	"fmt"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -74,9 +73,10 @@ func RouteAuthorized(c *gin.Context) {
 	if !atLeastOnePassed {
 		authToken := c.Request.Header.Get("Authorization")
 		session := model.LookupSession(authToken)
-		fmt.Println(session)
-		//todo, check against auth table of paths... And make that auth table
-		atLeastOnePassed = true
+		if session != nil {
+			//todo, check against auth table of paths... And make that auth table
+			atLeastOnePassed = true
+		}
 	}
 	if atLeastOnePassed {
 		c.Next()
@@ -89,16 +89,14 @@ func RouteAuthorized(c *gin.Context) {
 }
 func newRouter() *gin.Engine {
 	router := gin.Default()
-	unversioned := router.Group("/brcaid/")
-	unversioned.Handle("GET", "/about", aboutGetUnversioned)
-	unversioned.Handle("GET", "/healthcheck", healthCheckGetUnversioned)
 
 	formv1 := router.Group("/brcaid/survey/v1")
-	formv1.Handle("POST", "/contact", handleContactPost)
+	formv1.Handle("POST", "/survey-contacts", handleSurveyPost)
 	v1 := router.Group("/brcaid/brcaid/v1", RouteAuthorized)
 	v1.Handle("POST", "/login", loginHandler)
 	v1.Handle("POST", "/logout", logoutHandler)
 	v1.Handle("GET", "/users", userGetHandler)
+	v1.Handle("GET", "/survey-contacts", handleSurveyGet)
 	addOpenApiDefRoutes(router)
 	addSwaggerUIRoutes(router)
 	addUnversionedRoutes(router)

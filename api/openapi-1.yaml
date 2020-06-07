@@ -21,7 +21,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AboutResponse'
 
-  /survey/v1/contact:
+  /survey/v1/survey-contacts:
     post:
       summary: Used to post a form from the general public
       requestBody:
@@ -78,6 +78,22 @@ paths:
         '204':
           description: no content, logout success
 
+
+  /brcaid/v1/survey-contacts:
+    get:
+      security:
+        - AuthHeaderToken: []
+      summary: Gets a list of users
+      description: gets list surveys.  Results from this call have PII empty
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SurveyContact'
 
   /brcaid/v1/users:
     get:
@@ -233,9 +249,6 @@ components:
         preferedContact:
           type: string
           description: an enum really, phone or email
-        zip:
-          type: string
-          description: 5 digit zip code
 
     SurveyContactResp:
       type: object
@@ -260,5 +273,9 @@ components:
           type: array
           items:
             type: string
+        zip:
+          type: string
+          description: 5 digit zip code
+
         conactInfo:
           $ref: '#/components/schemas/SurveyContactPII'

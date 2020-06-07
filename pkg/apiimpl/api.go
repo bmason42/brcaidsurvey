@@ -40,8 +40,20 @@ func healthCheckGetUnversioned(c *gin.Context) {
 func swaggerUIGetHandler(c *gin.Context) {
 	c.Redirect(302, "/brcaid/swaggerui/index_v1.html")
 }
-
-func handleContactPost(c *gin.Context) {
+func handleSurveyGet(c *gin.Context) {
+	modelData, err := model.FetchSurveyData()
+	if err != nil {
+		c.JSON(handleError(c, err))
+		return
+	}
+	ret := make([]v1.SurveyContact, len(modelData))
+	for i, x := range modelData {
+		tmp, _ := SurveyContactModelToApi(&x, false)
+		ret[i] = *tmp
+	}
+	c.JSON(200, &ret)
+}
+func handleSurveyPost(c *gin.Context) {
 	var req v1.SurveyContact
 	err := c.ShouldBind(&req)
 	if err != nil {
@@ -49,8 +61,15 @@ func handleContactPost(c *gin.Context) {
 		return
 	}
 
+	modelData := SurveyContactApiToModel(&req)
+	err = model.PutSurveyContact(modelData)
+	if err != nil {
+		c.JSON(handleError(c, err))
+		return
+	}
 	var ret v1.SurveyContactResp
-	ret.RequestUUID = "1"
+	ret.RequestUUID = modelData.SurveyContactID
+
 }
 func loginHandler(c *gin.Context) {
 	var data v1.Login

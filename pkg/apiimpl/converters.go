@@ -19,6 +19,7 @@ func SurveyContactApiToModel(contact *v1.SurveyContact) *model.SurveyContact {
 	ret.NeedHelpNow = contact.NeedHelpNow
 	ret.OfferingHelp = contact.OfferingHelp
 	ret.RequestingHelp = contact.RequestingHelp
+	ret.ZipCode = contact.Zip
 	first := true
 	for _, x := range contact.NeededSkills {
 		if first {
@@ -44,16 +45,18 @@ func SurveyContactApiToModel(contact *v1.SurveyContact) *model.SurveyContact {
 	ret.PII = string(bits)
 	return &ret
 }
-func SurveyContactModelToApi(contact *model.SurveyContact) (*v1.SurveyContact, error) {
+func SurveyContactModelToApi(contact *model.SurveyContact, includePII bool) (*v1.SurveyContact, error) {
 	var ret v1.SurveyContact
 	var cipherRecord model.CipherRecord
-	err := json.Unmarshal([]byte(contact.PII), &cipherRecord)
-	if err != nil {
-		return nil, err
-	}
-	err = model.CipherRecordToPlainRecord(&cipherRecord, &ret.ConactInfo)
-	if err != nil {
-		return nil, err
+	if includePII {
+		err := json.Unmarshal([]byte(contact.PII), &cipherRecord)
+		if err != nil {
+			return nil, err
+		}
+		err = model.CipherRecordToPlainRecord(&cipherRecord, &ret.ConactInfo)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	ret.OfferedSkills = strings.Split(contact.OfferedSkills, "|")
@@ -61,5 +64,7 @@ func SurveyContactModelToApi(contact *model.SurveyContact) (*v1.SurveyContact, e
 	ret.RequestingHelp = contact.RequestingHelp
 	ret.OfferingHelp = contact.OfferingHelp
 	ret.NeedHelpNow = contact.NeedHelpNow
+	ret.Zip = contact.ZipCode
+
 	return &ret, nil
 }

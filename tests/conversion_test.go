@@ -18,8 +18,18 @@ func TestContactConversions(t *testing.T) {
 	api.ConactInfo = v1.SurveyContactPii{Name: "bob", Email: "bob@gmail.com", Phone: "503-555-1212", Zip: "62650", PreferedContact: "email"}
 
 	model := apiimpl.SurveyContactApiToModel(&api)
-	api2, err := apiimpl.SurveyContactModelToApi(model)
+	api2, err := apiimpl.SurveyContactModelToApi(model, true)
 	assert.Nil(t, err)
 	assert.NotNil(t, api2)
+	assert.Equal(t, api.ConactInfo, api2.ConactInfo)
+
+	api3, err := apiimpl.SurveyContactModelToApi(model, false)
+	assert.Nil(t, err)
+	assert.NotNil(t, api3)
+	assert.Equal(t, "", api3.ConactInfo.Name)
+	assert.Equal(t, "", api3.ConactInfo.Zip)
+	assert.Equal(t, "", api3.ConactInfo.Email)
+	assert.Equal(t, "", api3.ConactInfo.Phone)
+	assert.Equal(t, "", api3.ConactInfo.PreferedContact)
 	assert.Equal(t, api.ConactInfo, api2.ConactInfo)
 }
