@@ -63,8 +63,6 @@ paths:
         - AuthHeaderToken: []
       summary: Gets a list of users
       description: gets list of users
-      parameters:
-        - $ref: '#/components/parameters/AuthorizationHeader'
       responses:
         '200':
           description: ok
