@@ -5,7 +5,6 @@
 package main
 
 import (
-	"brcaidsurvey/pkg/db"
 	"brcaidsurvey/pkg/model"
 	"encoding/csv"
 	"fmt"
@@ -19,16 +18,23 @@ func main() {
 		fmt.Println("Need a zip code csv")
 		os.Exit(1)
 	}
-	db.InitDB()
-	connection, err := db.GetDBConnection()
-	if err != nil {
-		fmt.Printf("DB Open Error %s", err.Error())
-		os.Exit(1)
-	}
-	in, e := os.Open(os.Args[1])
+	model.InitDB()
+
+	exitCode := loadZipDB(os.Args[1])
+	os.Exit(exitCode)
+}
+
+//Loads zip from CSV file from here http://federalgovernmentzipcodes.us/index.html (edited)
+func loadZipDB(zipFile string) int {
+	in, e := os.Open(zipFile)
 	if e != nil {
 		fmt.Printf("Error  reading file %s\n", os.Args[1])
-		os.Exit(2)
+		return 1
+	}
+	connection, err := model.GetDBConnection()
+	if err != nil {
+		fmt.Printf("DB Open Error %s", err.Error())
+		return 1
 	}
 	zipMap := make(map[string]string)
 	reader := csv.NewReader(in)
@@ -39,7 +45,7 @@ func main() {
 				break
 			} else {
 				fmt.Printf("Error  reading file %s\n", os.Args[1])
-				os.Exit(2)
+				return 2
 			}
 		}
 		//skip deommentioned numbers
@@ -67,4 +73,5 @@ func main() {
 		}
 
 	}
+	return 0
 }

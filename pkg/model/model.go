@@ -5,5 +5,9 @@
 package model
 
 func InitModel() error {
-	return nil
+	err := InitSessionCache()
+	if err == nil {
+		err = InitDB()
+	}
+	return err
 }

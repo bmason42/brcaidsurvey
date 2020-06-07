@@ -40,7 +40,7 @@ type SurveyResult struct {
 	SurveyContactID string
 	Contact         SurveyContact `gorm:"foreignkey:SurveyContactID"`
 	//Region RegionInfo `gorm:"foreignkey:RegionID"`
-	//Needs []SupportConcern `gorm:"foreignkey:ConcernID;association_foreignkey:SurveyResultID"`
+	//Needs []Skill `gorm:"foreignkey:ConcernID;association_foreignkey:SurveyResultID"`
 }
 
 //Burning Man region
@@ -52,12 +52,12 @@ type RegionInfo struct {
 
 //different support issues such as phyiscal, financial, health, mental health
 //These are in the survey.json file
-type SupportConcern struct {
+type Skill struct {
 	ConcernID string `json:"concernID" gorm:"type:varchar(36);primary_key"`
 	Concern   string `json:"concern"`
 }
 
 type FormData struct {
-	BmRegions []RegionInfo     `json:"bmRegions"`
-	Concerns  []SupportConcern `json:"concerns"`
+	BmRegions []RegionInfo `json:"bmRegions"`
+	Skills    []Skill      `json:"skills"`
 }
