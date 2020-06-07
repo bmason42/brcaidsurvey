@@ -188,6 +188,11 @@ components:
         password:
           type: string
           description: password for the user
+      required:
+        - userID
+        - password
+
+
     LoginResponse:
       type: object
       properties:

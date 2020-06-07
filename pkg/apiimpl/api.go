@@ -6,6 +6,7 @@ package apiimpl
 
 import (
 	"brcaidsurvey/pkg/generated/v1"
+	"brcaidsurvey/pkg/model"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"net/http"
@@ -38,4 +39,21 @@ func healthCheckGetUnversioned(c *gin.Context) {
 }
 func swaggerUIGetHandler(c *gin.Context) {
 	c.Redirect(302, "/brcaid/swaggerui/index_v1.html")
+}
+
+func loginHandler(c *gin.Context) {
+	var data v1.Login
+	err := c.ShouldBind(&data)
+	if err != nil {
+		c.JSON(handleError(c, err))
+		return
+	}
+	b := model.ValidatePassword(data.UserID, data.Password)
+	if b {
+		session := model.MakeNewSession(data.UserID)
+		resp := v1.LoginResponse{AutoToken: session.SessionID}
+		c.JSON(201, &resp)
+	} else {
+		c.JSON(401, "")
+	}
 }

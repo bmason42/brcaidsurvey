@@ -18,6 +18,7 @@ const (
 const (
 	NETWORK_ERROR_INVALID_URL  = "invalidurl"
 	NETWORK_ERROR_CONNECT_FAIL = "connectfailed"
+	NETWORK_INVALID_JSON       = "invalidjson"
 )
 
 const (

@@ -12,6 +12,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"github.com/google/uuid"
 	"time"
 )
 
@@ -31,12 +32,26 @@ type Session struct {
 	Roles     RoleMap
 }
 
+func (t *Session) touch() {
+	t.LastTouch = time.Now()
+}
+
 //map of session to user ID
 var sessionCache map[string]*Session
 
 func InitSessionCache() error {
 	sessionCache = make(map[string]*Session, 0)
 	return nil
+}
+func MakeNewSession(userID string) *Session {
+	session := Session{UserID: userID, SessionID: uuid.New().String()}
+	session.touch()
+	user, e := FetchUserUserID(userID)
+	if e != nil {
+		session.Roles, _ = FetchRoleForUser(user.UserUUID)
+	}
+	sessionCache[session.SessionID] = &session
+	return &session
 }
 
 type User struct {

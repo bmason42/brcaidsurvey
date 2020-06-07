@@ -50,7 +50,7 @@ func newRouter() *gin.Engine {
 	router := gin.Default()
 	v1 := router.Group("/brcaid/v1")
 	v1.Handle("GET", "/about", aboutGetUnversioned)
-
+	v1.Handle("POST", "/login", loginHandler)
 	addOpenApiDefRoutes(router)
 	addSwaggerUIRoutes(router)
 	addUnversionedRoutes(router)

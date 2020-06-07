@@ -27,6 +27,7 @@ func mkUSMap() map[string]string {
 	ret := make(map[string]string)
 	ret[fmt.Sprintf("%s.%s", NETWOR_ERROR, NETWORK_ERROR_INVALID_URL)] = "Invalid URL provided"
 	ret[fmt.Sprintf("%s.%s", NETWOR_ERROR, NETWORK_ERROR_CONNECT_FAIL)] = "Failed to connect to external service"
+	ret[fmt.Sprintf("%s.%s", NETWOR_ERROR, NETWORK_INVALID_JSON)] = "JSON is invalid"
 	ret[fmt.Sprintf("%s.%s", BRCAID_ERROR, ERROR_CODE_UNKNOWN)] = "An unknown error occurred. "
 	ret[fmt.Sprintf("%s.%s", BRCAID_ERROR, ERROR_CODE_INVALID_USER_INPUT)] = "Invalid user data. "
 	ret[fmt.Sprintf("%s.%s", BRCAID_ERROR, ERROR_CODE_SYSTEM_NOT_INITIALIZED)] = "The model of the system has not been initialized. "

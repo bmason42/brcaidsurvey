@@ -8,6 +8,7 @@ import (
 	"brcaidsurvey/pkg/errors"
 	"brcaidsurvey/pkg/generated/v1"
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"net/http"
@@ -56,7 +57,12 @@ func handleError(ctx context.Context, e error) (httpStatusCode int, resp *v1.Err
 		httpStatusCode = http.StatusBadRequest
 
 		resp = newErrorResponse(x.Subsystem, x.SubSystemError, errors.GetErrorString(locale, x.ErrorCode()), x.Params)
-
+	case *json.SyntaxError:
+		x := e.(*json.SyntaxError)
+		log.Errorf("json error %s", e.Error())
+		httpStatusCode = http.StatusBadRequest
+		errorCode := fmt.Sprintf("%s.%s", errors.NETWOR_ERROR, errors.NETWORK_INVALID_JSON)
+		resp = newErrorResponse(errors.NETWOR_ERROR, errors.NETWORK_INVALID_JSON, errors.GetErrorString(locale, errorCode), map[string]string{"msg": x.Error()})
 	default:
 		log.Errorf("An unhandled error occurred: %T: %s", e, e.Error())
 		httpStatusCode = http.StatusInternalServerError
