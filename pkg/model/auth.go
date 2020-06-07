@@ -107,7 +107,7 @@ const somedata = "this is a error message"
 
 //recordID is the id of the record, does not matter what it is as long as its a value
 //plain is any jsonifiable record
-func plainSupportRecordToCipherRecord(recordID string, plain interface{}) *CipherRecord {
+func PlainStructToCipher(recordID string, plain interface{}) *CipherRecord {
 	var rec CipherRecord
 	rec.RecordID = recordID
 	rec.CipherVersion = 1
@@ -133,7 +133,7 @@ func plainSupportRecordToCipherRecord(recordID string, plain interface{}) *Ciphe
 
 }
 
-func cipherRecordToPlainRecord(cipherIn *CipherRecord, plainOut interface{}) error {
+func CipherRecordToPlainRecord(cipherIn *CipherRecord, plainOut interface{}) error {
 	iv, err := hex.DecodeString(cipherIn.IV)
 	if err != nil {
 		return err
@@ -151,7 +151,7 @@ func cipherRecordToPlainRecord(cipherIn *CipherRecord, plainOut interface{}) err
 	plainBits := make([]byte, len(cipherBits))
 	cbcDecrypt.CryptBlocks(plainBits, cipherBits)
 	plainBits = PKCS5Trimming(plainBits)
-	err = json.Unmarshal(plainBits, plainBits)
+	err = json.Unmarshal(plainBits, plainOut)
 	return err
 }
 

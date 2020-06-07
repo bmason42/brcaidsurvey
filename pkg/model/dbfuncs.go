@@ -197,3 +197,35 @@ func FetchUsers() ([]User, error) {
 	}
 	return users, nil
 }
+
+func PutSurveyContact(contact *SurveyContact) error {
+	db, err := GetDBConnection()
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+	var res *gorm.DB
+	var x SurveyContact
+	db.First(&x, "survey_contact_id = ?", contact.SurveyContactID)
+	if x.SurveyContactID == contact.SurveyContactID {
+		res = db.Save(contact)
+	} else {
+		res = db.Create(contact)
+	}
+	return res.Error
+}
+func FetchSurveyData() ([]SurveyContact, error) {
+	db, err := GetDBConnection()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+	var res *gorm.DB
+
+	var x []SurveyContact
+	res = db.Find(&x)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+	return x, nil
+}

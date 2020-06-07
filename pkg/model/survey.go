@@ -12,7 +12,8 @@ type PiInfo struct {
 type EncryptionVersion int
 
 const (
-	ENCRYPT_VERSION_NONE EncryptionVersion = iota
+	ENCRYPT_VERSION_NONE EncryptionVersion = 0
+	ENCRYPT_VERSION_ONE  EncryptionVersion = 1
 )
 
 type ZipCode struct {
@@ -28,8 +29,12 @@ type ZipCode struct {
 type SurveyContact struct {
 	//a generated uuid used for associates
 	SurveyContactID   string `gorm:"type:varchar(36);primary_key"`
+	RequestingHelp    bool
+	OfferingHelp      bool
+	NeedHelpNow       bool
+	OfferedSkills     string
+	RequestedSkills   string
 	EncryptionVersion EncryptionVersion
-	OSPhoneNumber     string `gorm:"type:varchar(12)"`
 	//the encrypted PiInfo
 	PII string `gorm:"type:text"`
 }

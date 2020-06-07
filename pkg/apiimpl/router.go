@@ -89,8 +89,13 @@ func RouteAuthorized(c *gin.Context) {
 }
 func newRouter() *gin.Engine {
 	router := gin.Default()
-	v1 := router.Group("/brcaid/v1", RouteAuthorized)
-	v1.Handle("GET", "/about", aboutGetUnversioned)
+	unversioned := router.Group("/brcaid/")
+	unversioned.Handle("GET", "/about", aboutGetUnversioned)
+	unversioned.Handle("GET", "/healthcheck", healthCheckGetUnversioned)
+
+	formv1 := router.Group("/brcaid/survey/v1")
+	formv1.Handle("POST", "/contact", handleContactPost)
+	v1 := router.Group("/brcaid/brcaid/v1", RouteAuthorized)
 	v1.Handle("POST", "/login", loginHandler)
 	v1.Handle("POST", "/logout", logoutHandler)
 	v1.Handle("GET", "/users", userGetHandler)

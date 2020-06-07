@@ -4,7 +4,7 @@ info:
   description: API for the survey flow work
   version: 1.0.0
 servers:
-  - url: /brcaid/v1
+  - url: /brcaid/
 
 
 paths:
@@ -21,7 +21,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/AboutResponse'
 
-  /login:
+  /survey/v1/contact:
+    post:
+      summary: Used to post a form from the general public
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurveyContact'
+      responses:
+        '201':
+          description: Form accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyContactResp'
+        '400':
+          description: something went wrong with the user input processing or internally, see the error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /brcaid/v1/login:
     post:
       summary: Logs a user in
       description: see summary
@@ -45,7 +67,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /logout:
+  /brcaid/v1/logout:
     post:
       summary: Logs out the user
       description: Logs the user out using the auth header provided in the call
@@ -57,7 +79,7 @@ paths:
           description: no content, logout success
 
 
-  /users:
+  /brcaid/v1/users:
     get:
       security:
         - AuthHeaderToken: []
@@ -198,3 +220,45 @@ components:
           type: string
           description: auto token to pass in the auth header (todo, document the auth header)
 
+
+    SurveyContactPII:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        preferedContact:
+          type: string
+          description: an enum really, phone or email
+        zip:
+          type: string
+          description: 5 digit zip code
+
+    SurveyContactResp:
+      type: object
+      properties:
+        requestUUID:
+          type: string
+
+    SurveyContact:
+      type: object
+      properties:
+        requestingHelp:
+          type: boolean
+        offeringHelp:
+          type: boolean
+        needHelpNow:
+          type: boolean
+        offeredSkills:
+          type: array
+          items:
+            type: string
+        neededSkills:
+          type: array
+          items:
+            type: string
+        conactInfo:
+          $ref: '#/components/schemas/SurveyContactPII'

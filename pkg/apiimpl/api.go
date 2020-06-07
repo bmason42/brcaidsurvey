@@ -41,6 +41,17 @@ func swaggerUIGetHandler(c *gin.Context) {
 	c.Redirect(302, "/brcaid/swaggerui/index_v1.html")
 }
 
+func handleContactPost(c *gin.Context) {
+	var req v1.SurveyContact
+	err := c.ShouldBind(&req)
+	if err != nil {
+		c.JSON(handleError(c, err))
+		return
+	}
+
+	var ret v1.SurveyContactResp
+	ret.RequestUUID = "1"
+}
 func loginHandler(c *gin.Context) {
 	var data v1.Login
 	err := c.ShouldBind(&data)
