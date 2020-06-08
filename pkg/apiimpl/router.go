@@ -92,6 +92,7 @@ func newRouter() *gin.Engine {
 
 	formv1 := router.Group("/brcaid/survey/v1")
 	formv1.Handle("POST", "/survey-contacts", handleSurveyPost)
+	formv1.Handle("GET", "/formdata", handleFormdataGet)
 	v1 := router.Group("/brcaid/brcaid/v1", RouteAuthorized)
 	v1.Handle("POST", "/login", loginHandler)
 	v1.Handle("POST", "/logout", logoutHandler)

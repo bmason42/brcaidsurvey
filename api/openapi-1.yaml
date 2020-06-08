@@ -21,6 +21,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/AboutResponse'
 
+  /survey/v1/formdata:
+    get:
+      description: Gets the data for needed by the UI to make the forms
+      summary: Gets form data
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyFormdData'
+        '400':
+          description: something went wrong with the user input processing or internally, see the error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /survey/v1/survey-contacts:
     post:
       summary: Used to post a form from the general public
@@ -29,6 +47,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SurveyContact'
+
       responses:
         '201':
           description: Form accepted
@@ -182,6 +201,22 @@ components:
           items:
             type: string
 
+
+    SurveyFormdData:
+      type: object
+      properties:
+        skiils:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+
+    Skill:
+      type: object
+      properties:
+        skillID:
+          type: string
+        skillText:
+          type: string
     User:
       type: object
       properties:

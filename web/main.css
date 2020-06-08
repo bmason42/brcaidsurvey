@@ -38,7 +38,6 @@ div.into {
     font-weight: normal;
     padding: 8px;
 }
-
 #support-form .submitbutton {
     horiz-align: center;
     margin: 0;
@@ -51,4 +50,9 @@ div.into {
 
 #pin {
     font-family: monospace, monospace;
+}
+
+span.os-help {
+    font-weight: bold;
+    color: red;
 }

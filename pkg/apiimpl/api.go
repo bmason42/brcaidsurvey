@@ -53,6 +53,12 @@ func handleSurveyGet(c *gin.Context) {
 	}
 	c.JSON(200, &ret)
 }
+func handleFormdataGet(c *gin.Context) {
+	var ret model.FormData
+	ret.Skills, _ = model.FetchSkills()
+	c.JSON(200, &ret)
+}
+
 func handleSurveyPost(c *gin.Context) {
 	var req v1.SurveyContact
 	err := c.ShouldBind(&req)

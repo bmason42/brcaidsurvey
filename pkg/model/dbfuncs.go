@@ -229,3 +229,19 @@ func FetchSurveyData() ([]SurveyContact, error) {
 	}
 	return x, nil
 }
+
+func FetchSkills() ([]Skill, error) {
+	db, err := GetDBConnection()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+	var res *gorm.DB
+
+	var x []Skill
+	res = db.Find(&x)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+	return x, nil
+}

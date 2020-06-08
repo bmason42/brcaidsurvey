@@ -10,48 +10,79 @@
 </head>
 <body>
 <div class="title">
-    Open Crisis Line, Burners helping Burners
+    BRC Aid Survey
 </div>
 <div class="into">
-
-    We are here to help<br>
-    Please fill in the form below sharing as much information as you want But we do need your phone number to contact
-    you<br>
     <p>
-        This is a peer support system. You will be put in contact with a ranger. Not necessarily a licensed
-        professional.
+        Fuck it, we are helping.<br>
+        Please fill in as much of the form as you feel comfortable with.<br>
+        We keep your information private, really we do. we worked really hard on this.
         <br>
-    <ol>
-        <li>Fill out the form</li>
-        <li>Press the "Connect" button</li>
-        <li>You will receive a text to your phone and a PIN number will be displayed here</li>
-        <li>Reply to the Text with the PIN number displayed below</li>
-    </ol>
     </p>
 
 </div>
 <form>
     <table id="support-form">
         <tr>
-            <th>Your phone number:</th>
+            <th>Name (playa, default or none):</th>
+            <td><input type="text" id="name"/></td>
+        </tr>
+
+        <tr>
+            <th>Phone number:</th>
             <td><input type="tel" id="phone-number"/></td>
         </tr>
         <tr>
-            <th>Your Name (playa, default or none):</th>
-            <td><input type="text" id="name"/></td>
+            <th>Email:</th>
+            <td><input type="email" id="email"/></td>
         </tr>
         <tr>
-            <th>Tell us what is going on today:</th>
-            <td><textarea id="whats-going-on" rows="3" cols="40"></textarea></td>
+            <th>Zip Code</th>
+            <td><input type="text" id="zipcode"/></td>
         </tr>
         <tr>
-            <th>PIN:</th>
-            <td><span id="pin">Click Connect to see PIN </span></td>
+            <th colspan="1">Help I can offer</th>
+            <td>
+                <table>
+                    <tr>
+                        <td><input type="checkbox">Work Help</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox">Physical Help</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox">Mental Help</td>
+                    </tr>
+                </table>
+            </td>
+
         </tr>
         <tr>
-            <td colspan="2" align="center"><input class="submitbutton" type="button" id="submit" value="Connect"
-                                                  onclick="handleSupportButton()"></td>
+            <th colspan="2">&nbsp;</th>
         </tr>
+        <tr>
+            <th colspan="1">Help I need</th>
+            <td>
+                <table>
+                    <tr>
+                        <td><input type="checkbox">Work Help</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox">Physical Help</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox">Mental Help</td>
+                    </tr>
+                </table>
+            </td>
+
+        </tr>
+
+        <tr>
+            <th><span class="os-help">I am having a bad time, I Need Some Help</span></th>
+            <td><input id="wanting-help" type="checkbox" value="Wanting Help"></td>
+        </tr>
+
 
     </table>
 </form>
